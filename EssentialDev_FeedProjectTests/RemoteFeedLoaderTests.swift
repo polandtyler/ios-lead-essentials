@@ -8,30 +8,37 @@
 import XCTest
 
 class HTTPClient {
-    static let shared = HTTPClient()
-    private init() {}
+    static var shared = HTTPClient() //  could make this a var in order to mock, but then we would be dealing with a shared global state... and aint nobody got time for that
+    
+    func get(from url: URL) {}
+}
+
+class HTTPClientSpy: HTTPClient {
     
     var requestedURL: URL?
+    
+    override func get(from url: URL) {
+        // this logic moved out of RemoteFeedLoader and into HTTPClient
+        requestedURL = url
+    }
+    
 }
 
 class RemoteFeedLoader {
-    func load() {
-        HTTPClient.shared.requestedURL = URL(string: "https://an-example-url.com")!
-    }
+    func load() {}
 }
 
 final class RemoteFeedLoaderTests: XCTestCase {
     
     func test_init() {
-        let client = HTTPClient.shared
+        let client = HTTPClientSpy()
+        HTTPClient.shared = client
         _ = RemoteFeedLoader()
         
         XCTAssertNil(client.requestedURL)
     }
     
     func test_load_requestDataFromURL() {
-        let sut = RemoteFeedLoader()
-        
         // ways of doing DI
         // 1. method injection, like:
         //      sut.load(client: client)
@@ -42,9 +49,10 @@ final class RemoteFeedLoaderTests: XCTestCase {
         //      client.requestedURL = URL(string: "https://an-example-url.com")
         
         // but there's also a concrete way (probably not recommended for most scenarios:
-         let client = HTTPClient.shared // 🤢 - Why would this need to be a singleton? I could (should) have more than one HTTP Client
-        
-        
+//         let client = HTTPClient. // 🤢 - Why would this need to be a singleton? I could (should) have more than one HTTP Client
+        let client = HTTPClientSpy()
+        HTTPClient.shared = client
+        let sut = RemoteFeedLoader()
         
         sut.load()
         
