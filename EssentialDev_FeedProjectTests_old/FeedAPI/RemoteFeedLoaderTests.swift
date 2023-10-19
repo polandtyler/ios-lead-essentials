@@ -157,50 +157,50 @@ final class RemoteFeedLoaderTests: XCTestCase {
 		
 		wait(for: [exp], timeout: 2.0)
 	}
+	
+	private func makeItem(id: UUID, description: String? = nil, location: String? = nil, imageURL: URL) -> (model: FeedItem, json: [String: Any]) {
+		let item = FeedItem(id: id, description: description, location: location, imageURL: imageURL)
 		
-		private func makeItem(id: UUID, description: String? = nil, location: String? = nil, imageURL: URL) -> (model: FeedItem, json: [String: Any]) {
-			let item = FeedItem(id: id, description: description, location: location, imageURL: imageURL)
-			
-			let json = [
-				"id": id.uuidString,
-				"description": description,
-				"location": location,
-				"image": imageURL.absoluteString
-			].compactMapValues { $0 }
-			
-			return (item, json)
-		}
+		let json = [
+			"id": id.uuidString,
+			"description": description,
+			"location": location,
+			"image": imageURL.absoluteString
+		].compactMapValues { $0 }
 		
-		private func makeItemsJSON(_ items: [[String: Any]]) -> Data {
-			let json = ["items": items]
-			return try! JSONSerialization.data(withJSONObject: json)
-		}
-		
-		private class HTTPClientSpy: HTTPClient {
-			
-			private var messages = [(url: URL, completion: (HTTPClientResult) -> Void)]()
-			
-			var requestedURLs: [URL] {
-				return messages.map { $0.url }
-			}
-			
-			func get(from url: URL, completion: @escaping (HTTPClientResult) -> Void) {
-				messages.append( (url, completion) )
-			}
-			
-			func complete(with error: Error, at index: Int = 0) {
-				messages[index].completion(.failure(error))
-			}
-			
-			func complete(withStatusCode code: Int, data: Data, at index: Int = 0) {
-				let response = HTTPURLResponse(
-					url: requestedURLs[index],
-					statusCode: code,
-					httpVersion: nil,
-					headerFields: nil
-				)!
-				messages[index].completion(.success(data, response))
-			}
-			
-		}
+		return (item, json)
 	}
+	
+	private func makeItemsJSON(_ items: [[String: Any]]) -> Data {
+		let json = ["items": items]
+		return try! JSONSerialization.data(withJSONObject: json)
+	}
+	
+	private class HTTPClientSpy: HTTPClient {
+		
+		private var messages = [(url: URL, completion: (HTTPClientResult) -> Void)]()
+		
+		var requestedURLs: [URL] {
+			return messages.map { $0.url }
+		}
+		
+		func get(from url: URL, completion: @escaping (HTTPClientResult) -> Void) {
+			messages.append( (url, completion) )
+		}
+		
+		func complete(with error: Error, at index: Int = 0) {
+			messages[index].completion(.failure(error))
+		}
+		
+		func complete(withStatusCode code: Int, data: Data, at index: Int = 0) {
+			let response = HTTPURLResponse(
+				url: requestedURLs[index],
+				statusCode: code,
+				httpVersion: nil,
+				headerFields: nil
+			)!
+			messages[index].completion(.success(data, response))
+		}
+		
+	}
+}
