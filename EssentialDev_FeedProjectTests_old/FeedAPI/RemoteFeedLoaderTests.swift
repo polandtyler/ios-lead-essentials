@@ -98,7 +98,7 @@ final class RemoteFeedLoaderTests: XCTestCase {
 	}
 	
 	func test_load_doesNotDeliverResultsAfterSUTInstanceHasBeenDeallocated() {
-		let url = URL(string: "http://a-url.com")!
+		let url = 
 		let client = HTTPClientSpy()
 		var sut: RemoteFeedLoader? = RemoteFeedLoader(url: url, client: client)
 		
