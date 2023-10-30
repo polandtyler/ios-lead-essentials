@@ -16,7 +16,7 @@ class URLSessionHTTPClient {
 	}
 	
 	func get(from url: URL, completion: @escaping (HTTPClientResult) -> Void) {
-		let url = URL(string: "http://wrong-url.com")!
+		let url = URL(string: "http://any-url.com")!
 		session.dataTask(with: url) { _, _, error in
 			if let error {
 				completion(.failure(error))
@@ -27,21 +27,21 @@ class URLSessionHTTPClient {
 
 final class URLSessionHTTPClientTests: XCTestCase {
 	
-//	func test_getFromURL_performsGETRequestWithURL() {
-//		URLProtocolStub.startInterceptingRequests()
-//
-//		URLProtocolStub.observeRequests { request in
-//			XCTAssertEqual(request.url, url)
-//			XCTAssertEqual(request.httpMethod, "GET")
-//		}
-//
-//		URLProtocolStub.stopInterceptingRequests()
-//	}
+	func test_getFromURL_performsGETRequestWithURL() {
+		URLProtocolStub.startInterceptingRequests()
+
+		URLProtocolStub.observeRequests { request in
+			XCTAssertEqual(request.url, url)
+			XCTAssertEqual(request.httpMethod, "GET")
+		}
+
+		URLProtocolStub.stopInterceptingRequests()
+	}
 	
 	func test_getFromURL_failsOnRequestError() {
 		URLProtocolStub.startInterceptingRequests()
 		let url = URL(string: "http://any-url.com")!
-		let error = NSError(domain: "any error", code: 1)
+		let error = NSError(domain: "any error", code: 1, userInfo: nil)
 		URLProtocolStub.stub(data: nil, response: nil, error: error)
 		
 		let sut = URLSessionHTTPClient()
