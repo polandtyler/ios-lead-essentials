@@ -58,7 +58,7 @@ final class URLSessionHTTPClientTests: XCTestCase {
 	}
 	
 	func test_getFromURL_failsOnRequestError() {
-		let requestError = NSError(domain: "any error", code: 1, userInfo: nil)
+		let requestError = anyNSError()
 		let receivedError = resultErrorFor(data: nil, response: nil, error: requestError)
 		
 		XCTAssertEqual(receivedError as NSError?, requestError)
@@ -68,12 +68,42 @@ final class URLSessionHTTPClientTests: XCTestCase {
 		XCTAssertNotNil(resultErrorFor(data: nil, response: nil, error: nil))
 	}
 	
+	func test_getFromUrl_failsOnAllInvalidRepresentationCases() {
+		XCTAssertNotNil(resultErrorFor(data: nil, response: nil, error: nil))
+		XCTAssertNotNil(resultErrorFor(data: nil, response: nonHttpUrlResponse(), error: nil))
+		XCTAssertNotNil(resultErrorFor(data: nil, response: anyHttpUrlResponse(), error: nil))
+		XCTAssertNotNil(resultErrorFor(data: anyData(), response: nil, error: nil))
+		XCTAssertNotNil(resultErrorFor(data: anyData(), response: nil, error: anyNSError()))
+		XCTAssertNotNil(resultErrorFor(data: nil, response: nonHttpUrlResponse(), error: anyNSError()))
+		XCTAssertNotNil(resultErrorFor(data: nil, response: anyHttpUrlResponse(), error: anyNSError()))
+		XCTAssertNotNil(resultErrorFor(data: anyData(), response: nonHttpUrlResponse(), error: anyNSError()))
+		XCTAssertNotNil(resultErrorFor(data: anyData(), response: anyHttpUrlResponse(), error: anyNSError()))
+		XCTAssertNotNil(resultErrorFor(data: anyData(), response: nonHttpUrlResponse(), error: nil))
+		XCTAssertNotNil(resultErrorFor(data: anyData(), response: anyHttpUrlResponse(), error: nil))
+	}
+	
 	// MARK: - TEST HELPERS
 	
 	private func makeSUT(file: StaticString = #file, line: UInt = #line) -> URLSessionHTTPClient {
 		let sut = URLSessionHTTPClient(session: URLSession.shared)
 		trackForMemoryLeaks(sut, file: file, line: line)
 		return sut
+	}
+	
+	private func anyData() -> Data {
+		return Data("any data".utf8)
+	}
+	
+	private func anyNSError() -> NSError {
+		return NSError(domain: "any error", code: 0)
+	}
+	
+	private func nonHttpUrlResponse() -> URLResponse {
+		return URLResponse(url: anyURL(), mimeType: nil, expectedContentLength: 0, textEncodingName: nil)
+	}
+	
+	private func anyHttpUrlResponse() -> HTTPURLResponse {
+		return HTTPURLResponse(url: anyURL(), statusCode: 200, httpVersion: nil, headerFields: nil)!
 	}
 	
 	private func resultErrorFor(data: Data?, response: URLResponse?, error: Error?, file: StaticString = #file, line: UInt = #line) -> Error? {
