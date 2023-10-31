@@ -39,11 +39,6 @@
                BlueprintName = "EssentialDev_FeedProjectTests"
                ReferencedContainer = "container:EssentialDev_FeedProject.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "URLSessionHTTPClientTests/test_getFromURL_failsOnRequestError()">
-               </Test>
-            </SkippedTests>
          </TestableReference>
          <TestableReference
             skipped = "NO"
