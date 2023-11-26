@@ -10,17 +10,21 @@ import EssentialDev_FeedProject
 
 class FeedStore {
 	var deleteCachedFeedCallCount = 0
+	
+	func deleteCachedFeed() {
+		deleteCachedFeedCallCount += 1
+	}
 }
 
 class LocalFeedLoader {
-	var store: FeedStore
+	private let store: FeedStore
 	
 	init(store: FeedStore) {
 		self.store = store
 	}
 	
 	func save(items: [FeedItem]) {
-		store.deleteCachedFeedCallCount += 1
+		store.deleteCachedFeed()
 	}
 }
 
@@ -47,8 +51,16 @@ final class CacheFeedUseCaseTests: XCTestCase {
 			FeedItem(id: UUID(),
 						description: "",
 						location: nil,
-						imageURL: URL(string: "http://a-url.com")!)
+						imageURL: anyURL())
 			]
+	}
+	
+	private func anyURL() -> URL {
+		return URL(string: "http://any-url.com")!
+	}
+	
+	private func badURL() -> URL {
+		return URL(string: "malformed url")!
 	}
 
 }
