@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum HTTPClientError: Error {
+	case callerReleasedUnexpectedly
+}
+
 public class URLSessionHTTPClient: HTTPClient {
 	private let session: URLSession
 	
@@ -18,6 +22,10 @@ public class URLSessionHTTPClient: HTTPClient {
 	
 	public func get(from url: URL, completion: @escaping (HTTPClientResult) -> Void) {
 		session.dataTask(with: url) { [weak self] data, response, error in
+			guard let self = self else {
+				completion(.failure(HTTPClientError.callerReleasedUnexpectedly))
+				return
+			}
 			if let error {
 				completion(.failure(error))
 			} else if let data = data, let response = response as? HTTPURLResponse {
