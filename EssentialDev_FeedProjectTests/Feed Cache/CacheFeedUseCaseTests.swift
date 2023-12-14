@@ -38,7 +38,7 @@ final class CacheFeedUseCaseTests: XCTestCase {
 	func test_save_requestsNewCacheInsertionWithTimestampOnSuccessfulDeletion() {
 		let timestamp = Date()
 		let items = [uniqueItem(), uniqueItem()]
-		let localItems = items.map { LocalFeedItem(id: $0.id, description: $0.description, location: $0.location, imageURL: $0.imageURL) }
+		let localItems = items.map(localFeedItem(from:))
 		let (sut, store) = makeSUT(currentDate: { timestamp })
 		
 		sut.save(items: items) { _ in }
@@ -201,6 +201,16 @@ final class CacheFeedUseCaseTests: XCTestCase {
 						description: "",
 						location: nil,
 						imageURL: anyURL())
+	}
+	
+	private func uniqueItems() -> (models: [FeedItem], local: [LocalFeedItem]) {
+		let models = [uniqueItem(), uniqueItem()]
+		let local = models.map(localFeedItem(from:))
+		return (models, local)
+	}
+	
+	private func localFeedItem(from item: FeedItem) -> LocalFeedItem {
+		LocalFeedItem(id: item.id, description: item.description, location: item.location, imageURL: item.imageURL)
 	}
 	
 	private func anyURL() -> URL {

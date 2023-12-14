@@ -40,9 +40,9 @@ final class URLSessionHTTPClientTests: XCTestCase {
 	
 	func test_getFromURL_failsOnRequestError() {
 		let requestError = anyNSError()
-		let receivedError = resultErrorFor(data: nil, response: nil, error: requestError)
+		let receivedError = resultErrorFor(data: nil, response: nil, error: requestError)!
 
-//		XCTAssert(receivedError === requestError) // error is tacking on userinfo dict, compare internals instead
+		XCTAssertEqual(receivedError as NSError, requestError)
 	}
 	
 	func test_getFromURL_failsOnAllNilValues() {
@@ -59,7 +59,6 @@ final class URLSessionHTTPClientTests: XCTestCase {
 		XCTAssertNotNil(resultErrorFor(data: anyData(), response: nonHttpUrlResponse(), error: anyNSError()))
 		XCTAssertNotNil(resultErrorFor(data: anyData(), response: anyHttpUrlResponse(), error: anyNSError()))
 		XCTAssertNotNil(resultErrorFor(data: anyData(), response: nonHttpUrlResponse(), error: nil))
-		XCTAssertNotNil(resultErrorFor(data: anyData(), response: anyHttpUrlResponse(), error: nil))
 	}
 	
 	func test_getFromURL_succeedsOnHTTPURLResponseWithData() {
