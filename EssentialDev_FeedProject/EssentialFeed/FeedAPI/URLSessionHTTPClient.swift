@@ -22,7 +22,7 @@ public class URLSessionHTTPClient: HTTPClient {
 	
 	public func get(from url: URL, completion: @escaping (HTTPClientResult) -> Void) {
 		session.dataTask(with: url) { [weak self] data, response, error in
-			guard let self = self else {
+			guard self != nil  else {
 				completion(.failure(HTTPClientError.callerReleasedUnexpectedly))
 				return
 			}

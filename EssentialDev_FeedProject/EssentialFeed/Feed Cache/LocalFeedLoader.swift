@@ -19,12 +19,12 @@ public final class LocalFeedLoader {
 		self.currentDate = currentDate
 	}
 	
-	public func save(items: [FeedItem], completion: @escaping (SaveResult) -> Void) {
+	public func save(_ feed: [FeedImage], completion: @escaping (SaveResult) -> Void) {
 		store.deleteCachedFeed { [weak self] error in
 			guard let self else { return }
 			
 			if error == nil {
-				self.store.insert(items.toLocal(), timestamp: self.currentDate()) { [weak self] error in
+				self.store.insert(feed.toLocal(), timestamp: self.currentDate()) { [weak self] error in
 					guard self != nil else { return }
 					completion(error)
 				}
@@ -34,21 +34,21 @@ public final class LocalFeedLoader {
 		}
 	}
 	
-	private func cache(_ items: [FeedItem], completion: @escaping (SaveResult) -> Void) {
-		store.insert(items.toLocal(), timestamp: self.currentDate(), completion: { [weak self] error in
+	private func cache(_ feed: [FeedImage], completion: @escaping (SaveResult) -> Void) {
+		store.insert(feed.toLocal(), timestamp: self.currentDate(), completion: { [weak self] error in
 			guard self != nil else { return }
 			completion(error)
 		})
 	}
 }
 
-private extension Array where Element == FeedItem {
-	func toLocal() -> [LocalFeedItem] {
+private extension Array where Element == FeedImage {
+	func toLocal() -> [LocalFeedImage] {
 		return map {
-			LocalFeedItem(id: $0.id,
+			LocalFeedImage(id: $0.id,
 						  description: $0.description,
 						  location: $0.location,
-						  imageURL: $0.imageURL)
+						   url: $0.url)
 		}
 	}
 }
