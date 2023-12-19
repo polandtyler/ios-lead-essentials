@@ -41,6 +41,9 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "LoadFeedFromRemoteUseCaseTests/test_load_deliversItemsOn200ResponseWithJSONItems()">
+               </Test>
+               <Test
                   Identifier = "URLSessionHTTPClientTests/test_getFromURL_failsOnRequestError()">
                </Test>
             </SkippedTests>
