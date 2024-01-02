@@ -45,7 +45,7 @@ final class LoadFeedFromCacheUseCaseTests: XCTestCase {
 		let feed = uniqueImageFeed()
 		let fixedCurrentDate = Date()
 		let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
-		let lessThanSevenDaysOldTimestamp = fixedCurrentDate.adding(days: -7).adding(seconds: 1)
+		let lessThanSevenDaysOldTimestamp = fixedCurrentDate.adding(days: -7).adding(seconds: 1 )
 		
 		expect(sut, toCompleteWith: .success(feed.models)) {
 			store.completeRetrieval(with: feed.local, timestamp: lessThanSevenDaysOldTimestamp)
@@ -135,7 +135,11 @@ final class LoadFeedFromCacheUseCaseTests: XCTestCase {
 		return (sut, store)
 	}
 	
-	private func expect(_ sut: LocalFeedLoader, toCompleteWith expectedResult: LocalFeedLoader.LoadResult, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
+	private func expect(_ sut: LocalFeedLoader, 
+						toCompleteWith expectedResult: LocalFeedLoader.LoadResult,
+						when action: () -> Void,
+						file: StaticString = #file,
+						line: UInt = #line) {
 		let exp = expectation(description: "Wait for load completion")
 		
 		sut.load() { receivedResult in
