@@ -81,10 +81,10 @@ Given the customer doesn't have connectivity
 5. System delivers image feed.
 
 #### Retrieval error course (sad path):
-1. System delivers error.
+1. System deletes cache.
 
 #### Expired cache course (sad path): 
-1. System delivers no feed images.
+1. System deletes cache.
 
 #### Empty cache course (sad path): 
 1. System delivers no feed images.
