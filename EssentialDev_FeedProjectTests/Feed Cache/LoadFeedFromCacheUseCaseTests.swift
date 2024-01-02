@@ -53,7 +53,6 @@ final class LoadFeedFromCacheUseCaseTests: XCTestCase {
 	}
 	
 	func test_load_deliversNoImagesOn7DayOldCache() {
-		let feed = uniqueImageFeed()
 		let fixedCurrentDate = Date()
 		let sevenDayOldTimestamp = fixedCurrentDate.adding(days: -7)
 		let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
@@ -64,7 +63,6 @@ final class LoadFeedFromCacheUseCaseTests: XCTestCase {
 	}
 	
 	func test_load_deliversNoImagesOnMoreThan7DayOldCache() {
-		let feed = uniqueImageFeed()
 		let fixedCurrentDate = Date()
 		let sevenDayOldTimestamp = fixedCurrentDate.adding(days: -7).adding(seconds: -1)
 		let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
@@ -104,7 +102,7 @@ final class LoadFeedFromCacheUseCaseTests: XCTestCase {
 		XCTAssertEqual(store.receivedMessages, [.retrieve])
 	}
 	
-	func test_load_deletesCacheOnSevenDayOldCache() {
+	func test_load_hasNoSideEffectOnSevenDayOldCache() {
 		let feed = uniqueImageFeed()
 		let fixedCurrentDate = Date()
 		let sevenDayOldTimestamp = fixedCurrentDate.adding(days: -7)
@@ -113,11 +111,10 @@ final class LoadFeedFromCacheUseCaseTests: XCTestCase {
 		sut.load { _ in }
 		store.completeRetrieval(with: feed.local, timestamp: sevenDayOldTimestamp)
 		
-		XCTAssertEqual(store.receivedMessages, [.retrieve, .deleteCachedFeed])
+		XCTAssertEqual(store.receivedMessages, [.retrieve])
 	}
 	
-	// completes date triangulation
-	func test_load_deletesCacheOnMoreThanSevenDayOldCache() {
+	func test_load_hasNoSideEffectsOnMoreThanSevenDayOldCache() {
 		let feed = uniqueImageFeed()
 		let fixedCurrentDate = Date()
 		let moreThanSevenDayOldTimestamp = fixedCurrentDate.adding(days: -7).adding(seconds: -1)
@@ -126,7 +123,7 @@ final class LoadFeedFromCacheUseCaseTests: XCTestCase {
 		sut.load { _ in }
 		store.completeRetrieval(with: feed.local, timestamp: moreThanSevenDayOldTimestamp)
 		
-		XCTAssertEqual(store.receivedMessages, [.retrieve, .deleteCachedFeed])
+		XCTAssertEqual(store.receivedMessages, [.retrieve])
 	}
 	
 	// MARK: - HELPERS
