@@ -27,6 +27,8 @@
 		95BFC9622B2BB4D80056CB71 /* FeedStoreSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BFC9612B2BB4D80056CB71 /* FeedStoreSpy.swift */; };
 		95D639242B4481D00099C3DC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 95D639232B4481D00099C3DC /* README.md */; };
 		95D639262B4482A70099C3DC /* ValidateFeedCacheUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D639252B4482A70099C3DC /* ValidateFeedCacheUseCaseTests.swift */; };
+		95D639282B4489970099C3DC /* FeedCacheTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D639272B4489970099C3DC /* FeedCacheTestHelpers.swift */; };
+		95D6392A2B448AB40099C3DC /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D639292B448AB40099C3DC /* SharedTestHelpers.swift */; };
 		95E0D1F12B28DE7600B43944 /* FeedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E0D1F02B28DE7600B43944 /* FeedStore.swift */; };
 		95E0D1F32B28DF2300B43944 /* LocalFeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E0D1F22B28DF2300B43944 /* LocalFeedLoader.swift */; };
 		95E0F7062AEF5FC500B0B077 /* XCTestCase+MemoryLeakTrackingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E0F7042AEF5F7B00B0B077 /* XCTestCase+MemoryLeakTrackingHelper.swift */; };
@@ -75,6 +77,8 @@
 		95BFC9612B2BB4D80056CB71 /* FeedStoreSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedStoreSpy.swift; sourceTree = "<group>"; };
 		95D639232B4481D00099C3DC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		95D639252B4482A70099C3DC /* ValidateFeedCacheUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateFeedCacheUseCaseTests.swift; sourceTree = "<group>"; };
+		95D639272B4489970099C3DC /* FeedCacheTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCacheTestHelpers.swift; sourceTree = "<group>"; };
+		95D639292B448AB40099C3DC /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
 		95E0D1F02B28DE7600B43944 /* FeedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedStore.swift; sourceTree = "<group>"; };
 		95E0D1F22B28DF2300B43944 /* LocalFeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFeedLoader.swift; sourceTree = "<group>"; };
 		95E0F7042AEF5F7B00B0B077 /* XCTestCase+MemoryLeakTrackingHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTrackingHelper.swift"; sourceTree = "<group>"; };
@@ -199,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				95BFC9612B2BB4D80056CB71 /* FeedStoreSpy.swift */,
+				95D639272B4489970099C3DC /* FeedCacheTestHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -217,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				95E0F7042AEF5F7B00B0B077 /* XCTestCase+MemoryLeakTrackingHelper.swift */,
+				95D639292B448AB40099C3DC /* SharedTestHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -392,10 +398,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95D639282B4489970099C3DC /* FeedCacheTestHelpers.swift in Sources */,
 				95D639262B4482A70099C3DC /* ValidateFeedCacheUseCaseTests.swift in Sources */,
 				952542BE2AD5C67C0049443B /* LoadFeedFromRemoteUseCaseTests.swift in Sources */,
 				95E0F7062AEF5FC500B0B077 /* XCTestCase+MemoryLeakTrackingHelper.swift in Sources */,
 				95BFC9622B2BB4D80056CB71 /* FeedStoreSpy.swift in Sources */,
+				95D6392A2B448AB40099C3DC /* SharedTestHelpers.swift in Sources */,
 				95E2999B2B13BF9000081617 /* CacheFeedUseCaseTests.swift in Sources */,
 				95BFC95F2B2BB3430056CB71 /* LoadFeedFromCacheUseCaseTests.swift in Sources */,
 				957B508E2AE4DA2F00B38D71 /* URLSessionHTTPClientTests.swift in Sources */,

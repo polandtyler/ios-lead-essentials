@@ -161,43 +161,4 @@ final class LoadFeedFromCacheUseCaseTests: XCTestCase {
 		action()
 		wait(for: [exp], timeout: 1.0)
 	}
-	
-	private func anyNSError() -> NSError {
-		return NSError(domain: "any error", code: 0)
-	}
-	
-	private func anyURL() -> URL {
-		return URL(string: "http://any-url.com")!
-	}
-	
-	private func uniqueImageFeed() -> (models: [FeedImage], local: [LocalFeedImage]) {
-		let models = [uniqueImage(), uniqueImage()]
-		let local = models.map(localFeedItem(from:))
-		return (models, local)
-	}
-	
-	private func emptyUniqueImageFeed() -> (models: [FeedImage], local: [LocalFeedImage]) {
-		return ([], [])
-	}
-	
-	private func uniqueImage() -> FeedImage {
-		return FeedImage(id: UUID(),
-						 description: "",
-						 location: nil,
-						 url: anyURL())
-	}
-	
-	private func localFeedItem(from item: FeedImage) -> LocalFeedImage {
-		LocalFeedImage(id: item.id, description: item.description, location: item.location, url: item.url)
-	}
-}
-
-private extension Date {
-	func adding(days: Int) -> Date {
-		return Calendar(identifier: .gregorian).date(byAdding: .day, value: days, to: Date())!
-	}
-	
-	func adding(seconds: TimeInterval) -> Date {
-		return self + seconds
-	}
 }
