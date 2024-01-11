@@ -26,7 +26,7 @@ public enum RetrieveCachedFeedResult {
 /*
  - Retrieve
 	✅ Empty cache returns empty
-	- empty cache twice returns empty (no side effects)
+	✅ empty cache twice returns empty (no side effects)
 	- non-empty cache returns data
 	- Non-empty cache twice returns the same data (no side-effects)
 	- Error (if applicable - ex: invalid data)
