@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		952542882AD5C4C90049443B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952542872AD5C4C90049443B /* AppDelegate.swift */; };
 		9525428A2AD5C4C90049443B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952542892AD5C4C90049443B /* SceneDelegate.swift */; };
-		9525428C2AD5C4C90049443B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525428B2AD5C4C90049443B /* ViewController.swift */; };
 		9525428F2AD5C4C90049443B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9525428D2AD5C4C90049443B /* Main.storyboard */; };
 		952542912AD5C4CA0049443B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 952542902AD5C4CA0049443B /* Assets.xcassets */; };
 		952542942AD5C4CA0049443B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 952542922AD5C4CA0049443B /* LaunchScreen.storyboard */; };
 		952542BA2AD5C50F0049443B /* FeedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952542B92AD5C50F0049443B /* FeedImage.swift */; };
 		952542BE2AD5C67C0049443B /* LoadFeedFromRemoteUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952542BD2AD5C67C0049443B /* LoadFeedFromRemoteUseCaseTests.swift */; };
+		95281D222B4DCF730035D246 /* CodableFeedStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95281D212B4DCF730035D246 /* CodableFeedStoreTests.swift */; };
 		9579070A2AD86DD7002E0312 /* RemoteFeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957907092AD86DD7002E0312 /* RemoteFeedLoader.swift */; };
 		957B4DAB2AE1CF2C00B38D71 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957B4DAA2AE1CF2C00B38D71 /* HTTPClient.swift */; };
 		957B4DAE2AE1CF7300B38D71 /* FeedItemsMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957B4DAD2AE1CF7300B38D71 /* FeedItemsMapper.swift */; };
@@ -59,7 +59,6 @@
 		952542842AD5C4C90049443B /* EssentialDev_FeedProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EssentialDev_FeedProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		952542872AD5C4C90049443B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		952542892AD5C4C90049443B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9525428B2AD5C4C90049443B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9525428E2AD5C4C90049443B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		952542902AD5C4CA0049443B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		952542932AD5C4CA0049443B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -67,6 +66,7 @@
 		9525429A2AD5C4CA0049443B /* EssentialDev_FeedProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialDev_FeedProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		952542B92AD5C50F0049443B /* FeedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImage.swift; sourceTree = "<group>"; };
 		952542BD2AD5C67C0049443B /* LoadFeedFromRemoteUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadFeedFromRemoteUseCaseTests.swift; sourceTree = "<group>"; };
+		95281D212B4DCF730035D246 /* CodableFeedStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableFeedStoreTests.swift; sourceTree = "<group>"; };
 		957907092AD86DD7002E0312 /* RemoteFeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFeedLoader.swift; sourceTree = "<group>"; };
 		957B4DAA2AE1CF2C00B38D71 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		957B4DAD2AE1CF7300B38D71 /* FeedItemsMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemsMapper.swift; sourceTree = "<group>"; };
@@ -142,7 +142,6 @@
 				952542B72AD5C4E30049443B /* EssentialFeed */,
 				952542872AD5C4C90049443B /* AppDelegate.swift */,
 				952542892AD5C4C90049443B /* SceneDelegate.swift */,
-				9525428B2AD5C4C90049443B /* ViewController.swift */,
 				9525428D2AD5C4C90049443B /* Main.storyboard */,
 				952542902AD5C4CA0049443B /* Assets.xcassets */,
 				952542922AD5C4CA0049443B /* LaunchScreen.storyboard */,
@@ -237,6 +236,7 @@
 				95E2999A2B13BF9000081617 /* CacheFeedUseCaseTests.swift */,
 				95BFC95E2B2BB3420056CB71 /* LoadFeedFromCacheUseCaseTests.swift */,
 				95D639252B4482A70099C3DC /* ValidateFeedCacheUseCaseTests.swift */,
+				95281D212B4DCF730035D246 /* CodableFeedStoreTests.swift */,
 			);
 			path = "Feed Cache";
 			sourceTree = "<group>";
@@ -384,7 +384,6 @@
 				95BFC95C2B2BA43E0056CB71 /* LocalFeedImage.swift in Sources */,
 				952542BA2AD5C50F0049443B /* FeedImage.swift in Sources */,
 				95D6392D2B4498830099C3DC /* FeedCachePolicy.swift in Sources */,
-				9525428C2AD5C4C90049443B /* ViewController.swift in Sources */,
 				95BFC95A2B2BA4180056CB71 /* RemoteFeedItem.swift in Sources */,
 				957B4DAB2AE1CF2C00B38D71 /* HTTPClient.swift in Sources */,
 				957B4DAE2AE1CF7300B38D71 /* FeedItemsMapper.swift in Sources */,
@@ -402,6 +401,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95281D222B4DCF730035D246 /* CodableFeedStoreTests.swift in Sources */,
 				95D639282B4489970099C3DC /* FeedCacheTestHelpers.swift in Sources */,
 				95D639262B4482A70099C3DC /* ValidateFeedCacheUseCaseTests.swift in Sources */,
 				952542BE2AD5C67C0049443B /* LoadFeedFromRemoteUseCaseTests.swift in Sources */,
