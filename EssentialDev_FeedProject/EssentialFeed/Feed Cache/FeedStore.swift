@@ -27,12 +27,12 @@ public enum RetrieveCachedFeedResult {
  - Retrieve
 	✅ Empty cache returns empty
 	✅ empty cache twice returns empty (no side effects)
-	- non-empty cache returns data
+	✅ non-empty cache returns data
 	- Non-empty cache twice returns the same data (no side-effects)
 	- Error (if applicable - ex: invalid data)
 	- Error twice returns same error
  - Insert
-	- To empty cache
+	✅ To empty cache
 	- To non-empty cache overrides previous data with new data
 	- Error (if applicable - ex: no write permission, out of space, etc)
  - Delete
