@@ -56,6 +56,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		950C2B4C2B571C5600A2B3F7 /* EssentialDev_FeedProject.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = EssentialDev_FeedProject.xctestplan; sourceTree = "<group>"; };
 		952542842AD5C4C90049443B /* EssentialDev_FeedProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EssentialDev_FeedProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		952542872AD5C4C90049443B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		952542892AD5C4C90049443B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +119,7 @@
 		9525427B2AD5C4C90049443B = {
 			isa = PBXGroup;
 			children = (
+				950C2B4C2B571C5600A2B3F7 /* EssentialDev_FeedProject.xctestplan */,
 				952542862AD5C4C90049443B /* EssentialDev_FeedProject */,
 				9525429D2AD5C4CA0049443B /* EssentialDev_FeedProjectTests */,
 				95FF7E132AF1AE7700BCE854 /* EssentialDev_FeedProjectEndToEndTests */,

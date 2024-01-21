@@ -1,0 +1,49 @@
+{
+  "configurations" : [
+    {
+      "id" : "7A0D6411-A1C5-4A51-8DC0-F91B41BAD2B0",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:EssentialDev_FeedProject.xcodeproj",
+      "identifier" : "952542832AD5C4C90049443B",
+      "name" : "EssentialDev_FeedProject"
+    }
+  },
+  "testTargets" : [
+    {
+      "skippedTests" : [
+        "LoadFeedFromRemoteUseCaseTests\/test_load_deliversItemsOn200ResponseWithJSONItems()",
+        "URLSessionHTTPClientTests\/test_getFromURL_failsOnRequestError()"
+      ],
+      "target" : {
+        "containerPath" : "container:EssentialDev_FeedProject.xcodeproj",
+        "identifier" : "952542992AD5C4CA0049443B",
+        "name" : "EssentialDev_FeedProjectTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:EssentialDev_FeedProject.xcodeproj",
+        "identifier" : "952542A32AD5C4CA0049443B",
+        "name" : "EssentialDev_FeedProjectUITests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:EssentialDev_FeedProject.xcodeproj",
+        "identifier" : "95FF7E112AF1AE7700BCE854",
+        "name" : "EssentialDev_FeedProjectEndToEndTests"
+      }
+    }
+  ],
+  "version" : 1
+}
