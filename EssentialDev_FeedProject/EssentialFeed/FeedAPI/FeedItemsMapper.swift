@@ -7,9 +7,9 @@
 
 import Foundation
 
-internal final class FeedItemMapper {
+ final class FeedItemMapper {
 	
-	internal static func map(_ data: Data,
+	 static func map(_ data: Data,
 							 from response: HTTPURLResponse
 	) throws -> [RemoteFeedItem] {
 		guard response.statusCode == HTTPCode.statusOK,
