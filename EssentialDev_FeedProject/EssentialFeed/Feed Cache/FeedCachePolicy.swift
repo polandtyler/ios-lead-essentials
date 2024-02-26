@@ -7,7 +7,7 @@
 
 import Foundation
 
- struct FeedCachePolicy {
+ internal final class FeedCachePolicy {
 	private init() {}
 	private static let calendar = Calendar(identifier: .gregorian)
 	

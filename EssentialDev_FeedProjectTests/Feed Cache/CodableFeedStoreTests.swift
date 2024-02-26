@@ -22,6 +22,7 @@ class CodableFeedStoreTests: XCTestCase {
 		undoStoreSideEffects()
 	}
 	
+	// MARK: Retrieve
 	func test_retrieve_deliversEmptyOnEmptyCache() {
 		let sut = makeSUT()
 		
@@ -80,6 +81,7 @@ class CodableFeedStoreTests: XCTestCase {
 		expect(sut, toRetrieveTwice: .failure(anyNSError()))
 	}
 	
+	// MARK: Insert
 	func test_insert_overridesPreviouslyInsertedCacheValues() {
 		let sut = makeSUT()
 		
@@ -106,6 +108,7 @@ class CodableFeedStoreTests: XCTestCase {
 		expect(sut, toRetrieve: .empty)
 	}
 	
+	// MARK: Delete
 	func test_delete_hasNoSideEffectsOnEmptyCache() {
 		let sut = makeSUT()
 		
@@ -126,16 +129,17 @@ class CodableFeedStoreTests: XCTestCase {
 	}
 	
 	// FIXME: when this test is uncommented, the `try!` in above tests crashes (cant find file/directory)
-//	func test_delete_deliversErrorOnDeletionError() {
-//		let noDeletePermissionURL = cachesDirectory()
-//		let sut = makeSUT(storeURL: noDeletePermissionURL)
-//		
-//		let deletionError = deleteCache(from: sut)
-//		
-//		XCTAssertNotNil(deletionError, "Expected cache deletion to fail")
-//		expect(sut, toRetrieve: .empty)
-//	}
+	func test_delete_deliversErrorOnDeletionError() {
+		let noDeletePermissionURL = cachesDirectory()
+		let sut = makeSUT(storeURL: noDeletePermissionURL)
+		
+		let deletionError = deleteCache(from: sut)
+		
+		XCTAssertNotNil(deletionError, "Expected cache deletion to fail")
+		expect(sut, toRetrieve: .empty)
+	}
 	
+	// MARK: Side Effects
 	func test_storeSideEffects_runSerially() {
 		let sut = makeSUT()
 		var completedOperationsInOrder = [XCTestExpectation]()
@@ -183,6 +187,7 @@ class CodableFeedStoreTests: XCTestCase {
 		return insertionError
 	}
 	
+	@discardableResult
 	private func deleteCache(from sut: FeedStore) -> Error? {
 		let exp = expectation(description: "Wait for cache deletion")
 		var deletionError: Error?
@@ -235,7 +240,7 @@ class CodableFeedStoreTests: XCTestCase {
 	}
 	
 	private func testSpecificStoreURL() -> URL {
-		return cachesDirectory().appendingPathComponent("\(type(of: self)).store", isDirectory: true)
+		return cachesDirectory().appendingPathComponent("\(type(of: self)).store")
 	}
 	
 	private func cachesDirectory() -> URL {

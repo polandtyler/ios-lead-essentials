@@ -34,7 +34,7 @@ final class ValidateFeedCacheUseCaseTests: XCTestCase {
 		XCTAssertEqual(store.receivedMessages, [.retrieve])
 	}
 	
-	func test_validate_doesNotDeleteUnexpiredCache() {
+	func test_validate_doesNotDeleteNonExpiredCache() {
 		let feed = uniqueImageFeed()
 		let fixedCurrentDate = Date()
 		let unexpiredCacheTimestamp = fixedCurrentDate.minusFeedCacheMaxAge().adding(seconds: 1)
@@ -46,7 +46,7 @@ final class ValidateFeedCacheUseCaseTests: XCTestCase {
 		XCTAssertEqual(store.receivedMessages, [.retrieve])
 	}
 	
-	func test_validate_deletesExpiringCache() {
+	func test_validate_deletesCacheOnExpiration() {
 		let feed = uniqueImageFeed()
 		let fixedCurrentDate = Date()
 		let expiringCacheTimestamp = fixedCurrentDate.minusFeedCacheMaxAge()
