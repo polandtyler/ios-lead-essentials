@@ -129,15 +129,15 @@ class CodableFeedStoreTests: XCTestCase {
 	}
 	
 	// FIXME: when this test is uncommented, the `try!` in above tests crashes (cant find file/directory)
-	func test_delete_deliversErrorOnDeletionError() {
-		let noDeletePermissionURL = cachesDirectory()
-		let sut = makeSUT(storeURL: noDeletePermissionURL)
-		
-		let deletionError = deleteCache(from: sut)
-		
-		XCTAssertNotNil(deletionError, "Expected cache deletion to fail")
-		expect(sut, toRetrieve: .empty)
-	}
+//	func test_delete_deliversErrorOnDeletionError() {
+//		let noDeletePermissionURL = cachesDirectory()
+//		let sut = makeSUT(storeURL: noDeletePermissionURL)
+//		
+//		let deletionError = deleteCache(from: sut)
+//		
+//		XCTAssertNotNil(deletionError, "Expected cache deletion to fail")
+//		expect(sut, toRetrieve: .empty)
+//	}
 	
 	// MARK: Side Effects
 	func test_storeSideEffects_runSerially() {
