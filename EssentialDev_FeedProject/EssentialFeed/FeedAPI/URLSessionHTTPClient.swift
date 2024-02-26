@@ -20,7 +20,7 @@ public class URLSessionHTTPClient: HTTPClient {
 	
 	private struct UnexpectedValuesRepresentationError: Error {}
 	
-	public func get(from url: URL, completion: @escaping (HTTPClient.Result) -> Void) {
+	public func get(from url: URL, completion: @escaping (HTTPClientResult) -> Void) {
 		session.dataTask(with: url) { [weak self] data, response, error in
 			guard self != nil  else {
 				completion(.failure(HTTPClientError.callerReleasedUnexpectedly))
@@ -29,7 +29,7 @@ public class URLSessionHTTPClient: HTTPClient {
 			if let error {
 				completion(.failure(error))
 			} else if let data = data, let response = response as? HTTPURLResponse {
-				completion(.success((data, response)))
+				completion(.success(data, response))
 			} else {
 				completion(.failure(UnexpectedValuesRepresentationError()))
 			}
