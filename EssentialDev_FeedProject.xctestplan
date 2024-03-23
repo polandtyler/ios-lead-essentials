@@ -20,7 +20,6 @@
     {
       "parallelizable" : true,
       "skippedTests" : [
-        "CodableFeedStoreTests\/test_delete_deliversErrorOnDeletionError()",
         "LoadFeedFromRemoteUseCaseTests\/test_load_deliversItemsOn200ResponseWithJSONItems()",
         "URLSessionHTTPClientTests\/test_getFromURL_failsOnRequestError()"
       ],

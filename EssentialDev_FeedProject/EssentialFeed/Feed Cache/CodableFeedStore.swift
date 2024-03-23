@@ -8,6 +8,7 @@
 import Foundation
 
 public class CodableFeedStore: FeedStore {
+
 	private struct Cache: Codable {
 		let feed: [CodableFeedImage]
 		let timestamp: Date
@@ -22,19 +23,19 @@ public class CodableFeedStore: FeedStore {
 		private let description: String?
 		private let location: String?
 		private let url: URL
-		
+
 		init(_ image: LocalFeedImage) {
 			id = image.id
 			description = image.description
 			location = image.location
 			url = image.url
 		}
-		
+
 		var local: LocalFeedImage {
 			return LocalFeedImage(id: id, description: description, location: location, url: url)
 		}
 	}
-	
+
 	private let storeURL: URL
 	private let queue = DispatchQueue(label: "\(CodableFeedStore.self)Queue", qos: .userInitiated)
 	
