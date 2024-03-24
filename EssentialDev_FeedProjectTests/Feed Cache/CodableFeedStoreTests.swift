@@ -36,10 +36,6 @@ class CodableFeedStoreTests: XCTestCase, FailableRetrieveFeedStoreSpecs, Failabl
 	}
 	
 	func test_retrieve_deliversFoundValuesOnNonEmptyCache() {
-		// FIXME: fails - when run in isolation its ok
-		/*
-		 failed - Expected to retrieve found(feed: [EssentialDev_FeedProject.LocalFeedImage(id: 606B1CB1-1561-4E70-ACDA-4E51F55A7B3E, description: Optional(""), location: nil, url: http://any-url.com), EssentialDev_FeedProject.LocalFeedImage(id: 9A311B3C-2E50-447B-B3D2-B4E6963378A3, description: Optional(""), location: nil, url: http://any-url.com)], timestamp: 2024-03-23 19:33:26 +0000), got empty instead
-		 */
 		let sut = makeSUT()
 		let feed = uniqueImageFeed().local
 		let timestamp = Date()
@@ -50,10 +46,6 @@ class CodableFeedStoreTests: XCTestCase, FailableRetrieveFeedStoreSpecs, Failabl
 	}
 	
 	func test_retrieve_hasNoSideEffectsOnNonEmptyCache() {
-		// FIXME: fails -
-		/*
-		 failed - Expected to retrieve found(feed: [EssentialDev_FeedProject.LocalFeedImage(id: 7BBF2042-2CB5-4A70-9499-80A140ACA56A, description: Optional(""), location: nil, url: http://any-url.com), EssentialDev_FeedProject.LocalFeedImage(id: 46485063-6E1D-4894-A52D-0FC7BED78781, description: Optional(""), location: nil, url: http://any-url.com)], timestamp: 2024-03-23 19:33:26 +0000), got empty instead
-		 */
 		let sut = makeSUT()
 		let feed = uniqueImageFeed().local
 		let timestamp = Date()
@@ -64,10 +56,6 @@ class CodableFeedStoreTests: XCTestCase, FailableRetrieveFeedStoreSpecs, Failabl
 	}
 
 	func test_retrieve_deliversFailureOnRetrievalError() {
-		/*
-		 FIXME: fails -
-		 Expected to retrieve failure(Error Domain=any error Code=0 "(null)"), got empty instead
-		 */
 		let storeURL = testSpecificStoreURL()
 		let sut = makeSUT(storeURL: storeURL)
 
@@ -79,10 +67,7 @@ class CodableFeedStoreTests: XCTestCase, FailableRetrieveFeedStoreSpecs, Failabl
 	}
 	
 	func test_retrieve_hasNoSideEffectsOnFailure() {
-		// FIXME: fails -
-		/*
-		 Expected to retrieve failure(Error Domain=any error Code=0 "(null)"), got empty instead
-		 */
+
 		let storeURL = testSpecificStoreURL()
 		let sut = makeSUT(storeURL: storeURL)
 
@@ -95,10 +80,6 @@ class CodableFeedStoreTests: XCTestCase, FailableRetrieveFeedStoreSpecs, Failabl
 	
 	// MARK: Insert
 	func test_insert_deliversNoErrorOnEmptyCache() {
-		/*
-		 FIXME: fails -
-		 "Error Domain=NSCocoaErrorDomain Code=4 "The file “CodableFeedStoreTests.store” doesn’t exist." UserInfo={NSFilePath=/Users/tpoland/Library/Developer/XCTestDevices/35A4D970-AAEA-44D7-8E22-D6D1A322880A/data/Containers/Data/Application/7F7BA41A-E4F4-480F-AE7C-C959E0BE21DA/Library/Caches/CodableFeedStoreTests.store, NSUnderlyingError=0x600000d34180 {Error Domain=NSPOSIXErrorDomain Code=2 "No such file or directory"}}" - Expected to insert cache successfully
-		 */
 		let sut = makeSUT()
 
 		let insertionError = insert((uniqueImageFeed().local, Date()), to: sut)
@@ -184,7 +165,6 @@ class CodableFeedStoreTests: XCTestCase, FailableRetrieveFeedStoreSpecs, Failabl
 		expect(sut, toRetrieve: .empty)
 	}
 
-	// FIXME: when this test is uncommented, the `try!` in above tests crashes (cant find file/directory)
 	func test_delete_deliversErrorOnDeletionError() {
 		let noDeletePermissionURL = noDeletePermissionsURL()
 		let sut = makeSUT(storeURL: noDeletePermissionURL)
@@ -278,9 +258,9 @@ class CodableFeedStoreTests: XCTestCase, FailableRetrieveFeedStoreSpecs, Failabl
 				(.failure, .failure):
 				break
 				
-			case let (.found(expected), .found(retrieved)):
-				XCTAssertEqual(retrieved.feed, expected.feed, file: file, line: line)
-				XCTAssertEqual(retrieved.timestamp, expected.timestamp, file: file, line: line)
+			case let (.found(expectedFeed, expectedTimestamp), .found(retrievedFeed, retrievedTimestamp)):
+				XCTAssertEqual(retrievedFeed, expectedFeed, file: file, line: line)
+				XCTAssertEqual(retrievedTimestamp, expectedTimestamp, file: file, line: line)
 
 			default:
 				XCTFail("Expected to retrieve \(expectedResult), got \(retrievedResult) instead", file: file, line: line)
